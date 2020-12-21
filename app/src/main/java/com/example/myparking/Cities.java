@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Cities extends AppCompatActivity {
-    public static String name;
-    public static String username;
+    String name;
+    String username;
     TextView message;
 
     RecyclerView mRecyclerView;
@@ -36,14 +36,7 @@ public class Cities extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter = new myAdapter(values, R.layout.myrow, this);
+        mAdapter = new myAdapter(values, R.layout.myrow, name, username,this);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    public static String getName() {
-        return name;
-    }
-    public static String getUsername() {
-        return username;
     }
 }

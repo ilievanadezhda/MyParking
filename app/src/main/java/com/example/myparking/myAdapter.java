@@ -17,6 +17,8 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
     private List<String> myList;
     private int rowLayout;
     private Context mContext;
+    String name;
+    String username;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView City;
@@ -27,10 +29,12 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
             button = (Button) itemView.findViewById(R.id.citybutton);
         }
     }
-    public myAdapter(List<String> myList, int rowLayout, Context context) {
+    public myAdapter(List<String> myList, int rowLayout, String name, String username, Context context) {
         this.myList = myList;
         this.rowLayout = rowLayout;
         this.mContext = context;
+        this.name = name;
+        this.username = username;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -46,8 +50,8 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), Reservation.class);
                 intent.putExtra("ImeGrad", entry);
-                //intent.putExtra("Ime", Cities.getName());
-                //intent.putExtra("Korisnichko", Cities.getUsername());
+                intent.putExtra("Ime", name);
+                intent.putExtra("Korisnichko", username);
                 v.getContext().startActivity(intent);
             }
         });

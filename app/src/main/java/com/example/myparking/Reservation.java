@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Reservation extends AppCompatActivity {
-    SQLiteDatabase database;
+    DBHelper database;
     TextView reservationMessage;
     Spinner timeSlots;
     DatePicker datePicker;
@@ -35,28 +35,39 @@ public class Reservation extends AppCompatActivity {
         Fragment frag1 =  getFragmentManager().findFragmentById(R.id.fragment1);
         Fragment frag2 =  getFragmentManager().findFragmentById(R.id.fragment2);
 
-        database = openOrCreateDatabase("Reservations", MODE_PRIVATE, null);
-        database.execSQL("CREATE TABLE IF NOT EXISTS Reservations(username VARCHAR, city VARCHAR, date VARCHAR, time VARCHAR);");
-
         Intent intent = getIntent();
         selectedCity = intent.getStringExtra("ImeGrad");
-        name = Cities.getName();
-        username = Cities.getUsername();
+        name = intent.getStringExtra("Ime");
+        username = intent.getStringExtra("Korisnichko");
 
         timeSlots = (Spinner) findViewById(R.id.timeslots);
         reservationMessage = (TextView) findViewById(R.id.reservationmessage);
         datePicker = (DatePicker) findViewById(R.id.datePicker);
+        database = new DBHelper(this);
 
         reservationMessage.setText("Добар избор " + name +"! Ајде да резервираме паркинг во " + selectedCity + "!");
     }
 
-    public void placeReservation(View view) {
+    public void toParkingPlaces(View view) {
         selectedTimeSlot = timeSlots.getSelectedItem().toString();
         selectedDay = datePicker.getDayOfMonth();
         selectedMonth = datePicker.getMonth() + 1;
         selectedYear = datePicker.getYear();
         selectedDate = selectedDay + "/" + selectedMonth + "/" + selectedYear;
-        database.execSQL("INSERT INTO Reservations VALUES('" + username + "', '" + selectedCity + "', '" + selectedDay + "', '" + selectedTimeSlot + "' );");
-        Toast.makeText(this, "Успешно додадена резервација!", Toast.LENGTH_LONG).show();
+        if(database.existingReservation(username, selectedDate, selectedTimeSlot)) {
+            Toast.makeText(this, "Веќе постои резервација во избраното време!", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(this, ParkingPlaces.class);
+            intent.putExtra("selectedTimeSlot", selectedTimeSlot);
+            intent.putExtra("selectedDay", selectedDay);
+            intent.putExtra("selectedMonth", selectedMonth);
+            intent.putExtra("selectedYear", selectedYear);
+            intent.putExtra("selectedDate", selectedDate);
+            intent.putExtra("selectedCity", selectedCity);
+            intent.putExtra("name", name);
+            intent.putExtra("username", username);
+            startActivity(intent);
+        }
+
     }
 }

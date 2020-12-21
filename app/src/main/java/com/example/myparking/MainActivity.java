@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        database = openOrCreateDatabase("Users", MODE_PRIVATE, null);
+        database = openOrCreateDatabase("MyDatabase", MODE_PRIVATE, null);
         database.execSQL("CREATE TABLE IF NOT EXISTS Users(name VARCHAR, surname VARCHAR, username VARCHAR, password VARCHAR);");
     }
     public void logIn(View view) {

@@ -26,7 +26,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        database = openOrCreateDatabase("Users", MODE_PRIVATE, null);
+        database = openOrCreateDatabase("MyDatabase", MODE_PRIVATE, null);
     }
 
     public void addUser(View view) {
