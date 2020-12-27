@@ -19,6 +19,7 @@ public class ConfirmationFragment extends Fragment {
     TextView confirmationMessage;
     Button home;
     Button navigate;
+    Button qr;
 
     String selectedParking;
     String selectedTimeSlot;
@@ -49,15 +50,16 @@ public class ConfirmationFragment extends Fragment {
         selectedDate = intent.getStringExtra("Datum");
         username = intent.getStringExtra("Korisnichko");
         name = intent.getStringExtra("Name");
-        lat = intent.getFloatExtra("Lat",0);
-        lng = intent.getFloatExtra("Long",0);
+        lat = intent.getFloatExtra("Lat", 0);
+        lng = intent.getFloatExtra("Long", 0);
 
         confirmationMessage = (TextView) getActivity().findViewById(R.id.confirmation_message);
         home = (Button) getActivity().findViewById(R.id.home_button);
         navigate = (Button) getActivity().findViewById(R.id.navigation_button);
+        qr = (Button) getActivity().findViewById(R.id.qr_button);
         database = new DBHelper(getContext());
 
-        confirmationMessage.setText("Успешно резервиравте паркинг во " + selectedParking + " на " + selectedDate + " во периодот "+ selectedTimeSlot+".");
+        confirmationMessage.setText("Успешно резервиравте паркинг во " + selectedParking + " на " + selectedDate + " во периодот " + selectedTimeSlot + ".");
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +82,18 @@ public class ConfirmationFragment extends Fragment {
                     intent.putExtra("parkingName", selectedParking);
                     startActivityForResult(intent, 1234);
                 }
+            }
+        });
+        qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QRCode.class);
+                intent.putExtra("Ime", name);
+                intent.putExtra("KorisnichkoIme", username);
+                intent.putExtra("SelectedParking", selectedParking);
+                intent.putExtra("SelectedTimeSlot", selectedTimeSlot);
+                intent.putExtra("SelectedDate", selectedDate);
+                startActivity(intent);
             }
         });
     }

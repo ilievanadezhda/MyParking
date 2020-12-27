@@ -12,10 +12,12 @@ public class Reservation_Fragment_1 extends Fragment {
     public Reservation_Fragment_1() {
         // Required empty public constructor
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment

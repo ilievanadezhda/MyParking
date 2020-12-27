@@ -35,7 +35,7 @@ public class Registration extends AppCompatActivity {
         input_username = (EditText) findViewById(R.id.registracija_korime);
         input_password = (EditText) findViewById(R.id.registracija_lozinka);
 
-        if (input_name.getText().toString().trim().length()==0 || input_surname.getText().toString().trim().length() == 0 || input_username.getText().toString().trim().length()==0 || input_password.getText().toString().trim().length() == 0 ) {
+        if (input_name.getText().toString().trim().length() == 0 || input_surname.getText().toString().trim().length() == 0 || input_username.getText().toString().trim().length() == 0 || input_password.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "Ве молиме потполнете ги сите полиња!", Toast.LENGTH_LONG).show();
         } else {
             name = input_name.getText().toString().trim();
@@ -44,11 +44,11 @@ public class Registration extends AppCompatActivity {
             password = input_password.getText().toString().trim();
 
             Cursor c1 = database.rawQuery("SELECT * FROM Users WHERE username LIKE '" + username + "'", null);
-            if(c1.moveToFirst()) {
+            if (c1.moveToFirst()) {
                 Toast.makeText(this, "Корисничкото име веќе постои!", Toast.LENGTH_LONG).show();
                 c1.close();
                 input_username.setText("");
-            } else if(password.length()<8) {
+            } else if (password.length() < 8) {
                 Toast.makeText(this, "Лозинката мора да содржи минимум 8 карактери!", Toast.LENGTH_LONG).show();
             } else {
                 database.execSQL("INSERT INTO Users VALUES('" + name + "', '" + surname + "', '" + username + "', '" + password + "' );");

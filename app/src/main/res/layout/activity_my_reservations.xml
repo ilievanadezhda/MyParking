@@ -4,32 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Confirmation">
+    tools:context=".MyReservations">
 
-    <fragment
-        android:id="@+id/fragment1"
-        android:name="com.example.myparking.ConfirmationFragment"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/myreservations"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment2"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Мои Резервации"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_confirmation" />
+        app:layout_constraintVertical_bias="0.05" />
 
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.myparking.NavigationFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewreservations"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment1"
-        tools:layout="@layout/fragment_navigation" />
+        app:layout_constraintTop_toBottomOf="@id/myreservations" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

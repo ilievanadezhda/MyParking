@@ -37,6 +37,7 @@ public class NavigationFragment extends Fragment {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(parking, 15.0f));
         }
     };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,

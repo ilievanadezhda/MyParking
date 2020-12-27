@@ -29,6 +29,7 @@ public class myAdapterParkingPlaces extends RecyclerView.Adapter<myAdapterParkin
         public Button button;
         public TextView freePlaces;
         public TextView takenPlaces;
+
         public ParkingViewHolder(View itemView) {
             super(itemView);
             parkingName = (TextView) itemView.findViewById(R.id.parkingcityname);
@@ -37,6 +38,7 @@ public class myAdapterParkingPlaces extends RecyclerView.Adapter<myAdapterParkin
             takenPlaces = (TextView) itemView.findViewById(R.id.takenplaces);
         }
     }
+
     public myAdapterParkingPlaces(List<String> myList, int rowLayout, String selectedDate, String selectedTimeslot, String username, String name, DBHelper database, Context context) {
         this.myList = myList;
         this.rowLayout = rowLayout;
@@ -44,7 +46,7 @@ public class myAdapterParkingPlaces extends RecyclerView.Adapter<myAdapterParkin
         this.selectedDate = selectedDate;
         this.selectedTimeSlot = selectedTimeslot;
         this.username = username;
-        this.name=name;
+        this.name = name;
         this.database = database;
     }
 
@@ -74,7 +76,7 @@ public class myAdapterParkingPlaces extends RecyclerView.Adapter<myAdapterParkin
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(freeSpaces != 0) {
+                if (freeSpaces != 0) {
                     database.insertIntoReservations(username, entry, selectedDate, selectedTimeSlot);
                     Intent intent = new Intent(v.getContext(), Confirmation.class);
                     intent.putExtra("Ime", entry);
@@ -89,6 +91,7 @@ public class myAdapterParkingPlaces extends RecyclerView.Adapter<myAdapterParkin
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return myList == null ? 0 : myList.size();
